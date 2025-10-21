@@ -62,6 +62,7 @@ from bfcl_eval.model_handler.local_inference.quick_testing_oss import (
 )
 from bfcl_eval.model_handler.local_inference.qwen import QwenHandler
 from bfcl_eval.model_handler.local_inference.qwen_fc import QwenFCHandler
+from bfcl_eval.model_handler.local_inference.gptoss_fc import GPTOssFCHandler
 from bfcl_eval.model_handler.local_inference.salesforce_llama import (
     SalesforceLlamaHandler,
 )
@@ -998,10 +999,22 @@ api_inference_model_map = {
     "Qwen3-30B-A3B-Coder-FC": ModelConfig(
         model_name="Qwen3-30B-A3B-Coder-FC",
         display_name="Qwen3-Coder-30B-A3B-Instruct (FC)",
-        url="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct",
+        url="https://huggingface.co/openai/gpt-oss-120b",
         org="Qwen",
         license="apache-2.0",
         model_handler=QwenFCHandler,
+        input_price=None,
+        output_price=None,
+        is_fc_model=True,
+        underscore_to_dot=False,
+    ),
+    "GPT-OSS-120B-FC": ModelConfig(
+        model_name="GPT-OSS-120B-FC",
+        display_name="GPT-OSS-120B (FC)",
+        url="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct",
+        org="openai",
+        license="apache-2.0",
+        model_handler=GPTOssFCHandler,
         input_price=None,
         output_price=None,
         is_fc_model=True,
