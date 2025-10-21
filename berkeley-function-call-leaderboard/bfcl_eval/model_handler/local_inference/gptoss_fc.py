@@ -48,19 +48,19 @@ class GPTOssFCHandler(OSSHandler):
         formatted_prompt = ""
 
         if len(function) > 0:
-            formatted_prompt += "<|im_start|>system\n"
+            formatted_prompt += "<|start|>system\n"
             if messages[0]["role"] == "system":
                 formatted_prompt += messages[0]["content"] + "\n\n"
 
             formatted_prompt += "# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>"
             for tool in function:
                 formatted_prompt += f"\n{json.dumps(tool)}"
-            formatted_prompt += '\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{"name": <function-name>, "arguments": <args-json-object>}\n</tool_call><|im_end|>\n'
+            formatted_prompt += '\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{"name": <function-name>, "arguments": <args-json-object>}\n</tool_call><|end|>\n'
 
         else:
             if messages[0]["role"] == "system":
                 formatted_prompt += (
-                    f"<|im_start|>system\n{messages[0]['content']}<|im_end|>\n"
+                    f"<|start|>system\n{messages[0]['content']}<|end|>\n"
                 )
 
         last_query_index = len(messages) - 1
@@ -82,7 +82,7 @@ class GPTOssFCHandler(OSSHandler):
             content = message["content"]
 
             if role == "user" or (role == "system" and idx != 0):
-                formatted_prompt += f"<|im_start|>{role}\n{content}<|im_end|>\n"
+                formatted_prompt += f"<|start|>{role}\n{content}<|end|>\n"
 
             elif role == "assistant":
                 reasoning_content = ""
@@ -99,15 +99,15 @@ class GPTOssFCHandler(OSSHandler):
                 if idx > last_query_index:
                     if idx == len(messages) - 1 or reasoning_content:
                         formatted_prompt += (
-                            f"<|im_start|>{role}\n<think>\n"
+                            f"<|start|>{role}\n<think>\n"
                             + reasoning_content.strip("\n")
                             + f"\n</think>\n\n"
                             + content.lstrip("\n")
                         )
                     else:
-                        formatted_prompt += f"<|im_start|>{role}\n{content}"
+                        formatted_prompt += f"<|start|>{role}\n{content}"
                 else:
-                    formatted_prompt += f"<|im_start|>{role}\n{content}"
+                    formatted_prompt += f"<|start|>{role}\n{content}"
 
                 if "tool_calls" in message:
                     for tool_call in message["tool_calls"]:
@@ -128,21 +128,21 @@ class GPTOssFCHandler(OSSHandler):
 
                         formatted_prompt += "}\n</tool_call>"
 
-                formatted_prompt += "<|im_end|>\n"
+                formatted_prompt += "<|end|>\n"
 
             elif role == "tool":
                 prev_role = messages[idx - 1]["role"] if idx > 0 else None
                 next_role = messages[idx + 1]["role"] if idx < len(messages) - 1 else None
 
                 if idx == 0 or prev_role != "tool":
-                    formatted_prompt += "<|im_start|>user"
+                    formatted_prompt += "<|start|>user"
 
                 formatted_prompt += f"\n<tool_response>\n{content}\n</tool_response>"
 
                 if idx == len(messages) - 1 or next_role != "tool":
-                    formatted_prompt += "<|im_end|>\n"
+                    formatted_prompt += "<|end|>\n"
 
-        formatted_prompt += "<|im_start|>assistant\n"
+        formatted_prompt += "<|start|>assistant\n"
         return formatted_prompt
 
     @override
