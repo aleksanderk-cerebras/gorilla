@@ -121,8 +121,8 @@ MODELS=(
     #"Qwen3-30B-A3B-Coder-FC:/mlf8-shared/hf_cache/hub/Qwen3-Coder-30B-A3B-Instruct:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel --rope-scaling '{\"rope_type\":\"yarn\",\"factor\":2.0,\"original_max_position_embeddings\":32768}':qwen"
     #"Qwen3-30B-A3B-Coder-FC:/mlf8-shared/aleksanderk/Qwen3-Coder-30B-A3B-gs18x9:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel --rope-scaling '{\"rope_type\":\"yarn\",\"factor\":2.0,\"original_max_position_embeddings\":32768}':qwen"
     #"Qwen3-30B-A3B-Coder-FC:/mlf8-shared/aleksanderk/Qwen3-Coder-30B-A3B-test-18x9:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel --rope-scaling '{\"rope_type\":\"yarn\",\"factor\":2.0,\"original_max_position_embeddings\":32768}':qwen"
-    "Qwen3-30B-A3B-Coder-FC:/mlf8-shared/aleksanderk/Qwen3-Coder-30B-A3B-lut-test:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel:qwen"
-    #"GPT-OSS-120B-FC:/mlf6-shared/aleksanderk/gpt-oss-120b-lut:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel:gpt-oss"
+    #"Qwen3-30B-A3B-Coder-FC:/mlf8-shared/aleksanderk/Qwen3-Coder-30B-A3B-lut-test:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel:qwen"
+    "GPT-OSS-120B-FC:/mlf6-shared/aleksanderk/gpt-oss-120b-lut-test2:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel:gpt-oss"
     #"GPT-OSS-120B-FC:/mlf8-shared/hf_cache/hub/gpt-oss-120b-bf16:4:65536:0.9:--enable-chunked-prefill --trust-remote-code --enable-expert-parallel:gpt-oss"
 )
 
