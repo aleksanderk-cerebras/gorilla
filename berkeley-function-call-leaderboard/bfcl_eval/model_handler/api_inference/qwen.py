@@ -2,6 +2,7 @@ import os
 from typing import Any
 
 from bfcl_eval.model_handler.api_inference.openai_completion import OpenAICompletionsHandler
+from bfcl_eval.model_handler.base_handler import BaseHandler
 from bfcl_eval.model_handler.model_style import ModelStyle
 from openai import OpenAI
 from overrides import override
